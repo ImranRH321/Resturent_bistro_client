@@ -23,7 +23,7 @@ const Footer = () => {
       <div className="col-span-4 text-center ">
         <p className="capitalize bg-dark text-white py-2 px-1 ">Copyright © CulinaryCloud. All rights reserved.</p>
       </div>
-    </footer>
+    </footer> 
   );
 };
 
