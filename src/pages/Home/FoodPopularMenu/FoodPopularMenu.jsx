@@ -13,7 +13,7 @@ const FoodPopularMenu = () => {
       });
   }, []);
   return (
-    <div>
+    <div className="p-4 my-5">
       <SectionTitle
         smallHeading={"---Check it out---"}
         largeHeading={"FROM OUR MENU"}
@@ -24,6 +24,11 @@ const FoodPopularMenu = () => {
             foodMenuItem.map((menuItem) => <MenuItemCard key={menuItem._id} menuItem={menuItem}></MenuItemCard>) 
            }
       </div>
+ {/*  */}
+      <div className="flex justify-center items-center ">
+      <button className="mt-4 px-10  btn btn-outline border-b-4">View Full  Menu</button>
+      </div>
+
     </div>
   );
 };
