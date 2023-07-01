@@ -23,3 +23,11 @@
         */
 
 
+// install process pacage ---------/ 
+/**
+ * 1. react router dom 
+ * 2. Twailwind css and css daisuy kala ui 
+ * 3. React Awesome components --> React responsive Carosel -> install npm
+ * 4. React Awesome components --> Swiper Carosel -> install npm
+ * 
+ * */
