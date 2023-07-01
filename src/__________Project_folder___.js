@@ -3,10 +3,11 @@
         src --> 
         Routes --< Routes,
         Layout --> Main
-        Page --> Home /
+        Components -->( SectionTitle.js)
         firebase --> (firebase.config.js)
         providers -->   (AuthProvider.jsx)
         hooks ---> (useAdmin.jsx , useAuth.jsx , useAxiosSecure.jsx ,useCart.jsx ,useMenu.jsx)
+        Page --> DownUp See !
         */
         
         
