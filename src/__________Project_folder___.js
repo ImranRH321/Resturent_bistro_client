@@ -25,11 +25,12 @@
 
 
 // install process pacage ---------/ 
-/**
+/** 
  * 1. react router dom 
  * 2. Twailwind css and css daisuy kala ui 
  * 3. React Awesome components --> React responsive Carosel -> install npm
  * 4. React Awesome components --> Swiper Carosel Swiper -> install npm
  * 4. React Awesome components --> Swiper Ratting -> install npm
+ * npm i react-helmet-async --> route onoser page title  set daynamic
  * 
  * */
