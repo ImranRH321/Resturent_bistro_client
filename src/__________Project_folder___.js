@@ -19,7 +19,7 @@
         Menu --< (Menu, MenuCategory);
         Order--< (Order, OrderTab);
         Shared -->(Cover, Footer, MenuItem, NavBar,
-        SocialLogin, Secret
+        SocialLogin, Secret) --> ( Cover With With Blur Parallax Using React Parallax -- pageCover background scroll animation )
         SignUp --< (SignUp)
         */
 
@@ -32,5 +32,6 @@
  * 4. React Awesome components --> Swiper Carosel Swiper -> install npm
  * 4. React Awesome components --> Swiper Ratting -> install npm
  * npm i react-helmet-async --> route onoser page title  set daynamic
- * 
+ *  npm add react-parallax Parallax Using React Parallax -> Scroll --> 
+ * Error --> paralaz not working error solve last time <div className=""></div>
  * */

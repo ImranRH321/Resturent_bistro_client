@@ -16,10 +16,12 @@ import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 const FoodCategory = () => {
   return (
     <section>
+      {/* Title page heading Section title */}
       <SectionTitle
         smallHeading="---From 11:00am to 10:00pm---"
         largeHeading="ORDER ONLINE"
       ></SectionTitle>
+      {/*  */}
       <Swiper
         slidesPerView={4}
         spaceBetween={30}
