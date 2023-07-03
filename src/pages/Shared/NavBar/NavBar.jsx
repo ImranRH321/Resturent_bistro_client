@@ -17,7 +17,7 @@ const NavBar = () => {
         <Link to="/ourMenu">Our Menu</Link>
       </li>
       <li>
-        <Link to="/">Our Shop</Link>
+        <Link to="/orderFood/salad">Our Shop</Link>
       </li>
 
       <li>
@@ -43,6 +43,10 @@ const NavBar = () => {
       </li>
 
       <li>
+       <div className="flex gap-2 justify-center items-center">
+       <Link to="/login">Login</Link>
+        <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+       </div>
        <div className="flex gap-2 justify-center items-center">
        <Link to="/">SIGN OUT</Link>
         <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />

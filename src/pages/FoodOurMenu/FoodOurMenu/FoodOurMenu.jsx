@@ -8,14 +8,14 @@ import soupImg from "../../../assets/menu/soup-bg.jpg";
 import PageCover from "../../Shared/PageCover/PageCover";
 import useFoodMenuData from "../../../hooks/useFoodMenuData";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
-import FoodMenuCategory from "./FoodMenuCategory/FoodMenuCategory";
+import FoodMenuCategory from "../FoodMenuCategory/FoodMenuCategory";
 
 const FoodOurMenu = () => {
   const [foodMenu] = useFoodMenuData();
   const offered = foodMenu.filter((item) => item.category === "offered");
-  const dessert = foodMenu.filter((item) => item.category === "offered");
-  const pizza = foodMenu.filter((item) => item.category === "offered");
-  const salad = foodMenu.filter((item) => item.category === "pizza");
+  const dessert = foodMenu.filter((item) => item.category === "dessert");
+  const pizza = foodMenu.filter((item) => item.category === "pizza");
+  const salad = foodMenu.filter((item) => item.category === "salad");
   const drinks = foodMenu.filter((item) => item.category === "drinks");
   const soup = foodMenu.filter((item) => item.category === "soup");
 
@@ -36,27 +36,27 @@ const FoodOurMenu = () => {
           smallHeading={"---Don't miss---"}
           largeHeading={"TODAY'S OFFER"}
         ></SectionTitle>
-        <FoodMenuCategory foodItems={offered}></FoodMenuCategory>
+        <FoodMenuCategory foodItems={offered} foodNameTitle="offered"></FoodMenuCategory>
       </div>
       {/* dessert  */}
       <div>
-        <PageCover coverImg={dessertImg} pageCoverTitle="DESSERTS"></PageCover>
-        <FoodMenuCategory foodItems={dessert}></FoodMenuCategory>
+        <PageCover coverImg={dessertImg} pageCoverTitle="dessert"></PageCover>
+        <FoodMenuCategory foodItems={dessert} foodNameTitle="dessert"></FoodMenuCategory>
       </div>
       {/* pizza  */}
       <div>
         <PageCover coverImg={pizzaImg} pageCoverTitle="pizza"></PageCover>
-        <FoodMenuCategory foodItems={pizza}></FoodMenuCategory>
+        <FoodMenuCategory foodItems={pizza} foodNameTitle="pizza"></FoodMenuCategory>
       </div>
       {/* Salad  */}
       <div>
         <PageCover coverImg={saladImg} pageCoverTitle="Salad"></PageCover>
-        <FoodMenuCategory foodItems={salad}></FoodMenuCategory>
+        <FoodMenuCategory foodItems={salad} foodNameTitle="salad"></FoodMenuCategory>
       </div>
       {/* soup  */}
       <div>
         <PageCover coverImg={soupImg} pageCoverTitle="Soup"></PageCover>
-        <FoodMenuCategory foodItems={soup}></FoodMenuCategory>
+        <FoodMenuCategory foodItems={soup} foodNameTitle="soup"></FoodMenuCategory>
       </div>
     </div>
   );
