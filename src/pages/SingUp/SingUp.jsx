@@ -1,18 +1,18 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const SingUp = () => {
   const { createUser } = useContext(AuthContext);
 
-  const handleRegisterFormUser = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const name = form.name.value;
-    const email = form.email.value;
-    const password = form.password.value;
-    console.log(name, email, password);
-  };
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
 
   return (
     <div className="hero min-h-screen bg-base-200">
@@ -26,7 +26,7 @@ const SingUp = () => {
           </p>
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <form onSubmit={handleRegisterFormUser} className="card-body">
+          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
@@ -36,7 +36,12 @@ const SingUp = () => {
                 placeholder="Your Name"
                 name="name"
                 className="input input-bordered"
+                {...register("name", { required: true })}
               />
+              <p className="text-red-600">
+                {" "}
+                {errors.name && <span>This field is required</span>}
+              </p>
             </div>
             {/* email  */}
             <div className="form-control">
@@ -48,7 +53,12 @@ const SingUp = () => {
                 placeholder="Your email"
                 className="input input-bordered"
                 name="email"
+                {...register("email", { required: true })}
               />
+              <p className="text-red-600">
+                {" "}
+                {errors.email && <span>Email is required</span>}
+              </p>
             </div>
             {/* Password  */}
             <div className="form-control">
@@ -60,7 +70,16 @@ const SingUp = () => {
                 placeholder="Your email"
                 className="input input-bordered"
                 name="password"
+                {...register(
+                  "password",
+                  { required: true },
+                  { minLength: 6, maxLength: 20 }
+                )}
               />
+              <p className="text-red-600">
+                {" "}
+                {errors.password && <span>Password is required</span>}
+              </p>
             </div>
             <div className="form-control mt-2">
               <input type="submit" value="SingUp" className="btn btn-info" />

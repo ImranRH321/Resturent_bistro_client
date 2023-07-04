@@ -34,6 +34,8 @@
  * npm install --save react-tabs
  * npm install react-simple-captcha --> login page captcha validation
  * firebasde --> npm install firebase 
+ * React farmik login Register validation ar jonno use kora hay
+ * npm install react-hook-form
  * */
 
 
