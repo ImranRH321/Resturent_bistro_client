@@ -32,6 +32,7 @@ const OrderFoodShop = () => {
         coverImg={orderShopBannerImg}
         pageCoverTitle={"OUR SHOP"}
       ></PageCover>
+      {/* Just See finaly delete4d is prolbem small */}
       <h1>TabIndex: {tabIndex}</h1>
       <h1>category: {category}</h1>
       <h1>initialIndex: {initialIndex}</h1>
