@@ -10,7 +10,7 @@ const NavBar = () => {
     .then(() => console.log('Logged out'))
     .then((error) => console.log(error.message))
   }
-  
+
   const headersMenu = (
     <>
       <li>
@@ -27,6 +27,9 @@ const NavBar = () => {
       </li>
       <li>
         <Link to="/orderFood/salad">Our Shop</Link>
+      </li>
+      <li>
+        <Link to="/secret">Secret</Link>
       </li>
 
       <li>

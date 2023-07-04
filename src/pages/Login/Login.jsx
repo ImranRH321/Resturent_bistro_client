@@ -7,7 +7,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
@@ -19,6 +19,12 @@ const Login = () => {
   const [validatedError, setValidatedError] = useState("");
   const [disabled, setDisabled] = useState(true);
   const { loginUser } = useContext(AuthContext);
+
+  // 
+  let navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
+
 
   //
   useEffect(() => {
@@ -35,6 +41,7 @@ const Login = () => {
       const loggedUser = userCredential.user;
       // console.log(loggedUser, "--> loggedUser");
       Swal.fire("user login successfully");
+      navigate(from, { replace: true });
     });
   };
 

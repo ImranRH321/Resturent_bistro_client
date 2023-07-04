@@ -5,6 +5,8 @@ import FoodOurMenu from "../pages/FoodOurMenu/FoodOurMenu/FoodOurMenu";
 import OrderFoodShop from "../pages/OrderFoodShop/OrderFoodShop/OrderFoodShop";
 import Login from "../pages/Login/Login";
 import SingUp from "../pages/SingUp/SingUp";
+import Secret from "../pages/Shared/Secret/Secret";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +18,15 @@ export const router = createBrowserRouter([
       { path: "orderFood/:category", element: <OrderFoodShop></OrderFoodShop> },
       { path: "login", element: <Login></Login> },
       { path: "singup", element: <SingUp></SingUp> },
+      {
+        path: "secret",
+        element: (
+          <PrivateRoute>
+            {" "}
+            <Secret></Secret>
+          </PrivateRoute>
+        ),
+      },
     ],
   },
 ]);

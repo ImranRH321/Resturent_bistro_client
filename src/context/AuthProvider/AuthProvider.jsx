@@ -14,19 +14,22 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(true);
 
   // createUser
   const registerUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
   // singIn
   const loginUser = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   // logOut
   const logOut = () => {
+    setLoading(true);
     signOut(auth);
   };
 
