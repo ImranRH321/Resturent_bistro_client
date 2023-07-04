@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 
 const NavBar = () => {
+  const {user, logOut} = useContext(AuthContext)
+
+  const logOutButton = () => {
+    logOut()
+    .then(() => console.log('Logged out'))
+    .then((error) => console.log(error.message))
+  }
+  
   const headersMenu = (
     <>
       <li>
@@ -41,22 +50,21 @@ const NavBar = () => {
           </div>
         </label>
       </li>
-
-      {/* 
-  <div className="flex gap-2 justify-center items-center">
-       <Link to="/login">Login</Link>
-        <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-       </div>
-*/}
-      <li>
+    
+    {
+      user ? <>
+      <button onClick={logOutButton} className="btn btn-error btn-sm">LogOut</button>
+      </>:<><li>
         <div className="flex gap-2 justify-center items-center">
-          <Link to="/singup">SIGN OUT</Link>
+          <Link to="/login">Login</Link>
           <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
         </div>
-      </li>
+      </li></>
+    }  
     </>
   );
 
+ 
   return (
     <>
       <button className="btn btn-primary">Button</button>

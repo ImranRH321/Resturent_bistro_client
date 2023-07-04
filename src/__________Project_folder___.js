@@ -36,6 +36,8 @@
  * firebasde --> npm install firebase 
  * React farmik login Register validation ar jonno use kora hay
  * npm install react-hook-form
+ * npm install sweetalert2
+ * 
  * */
 
 

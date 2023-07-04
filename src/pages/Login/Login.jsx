@@ -4,21 +4,23 @@
 // Create  a design login page nad  console emial , passsword
 // react caftrue password -->
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
-  LoadCanvasTemplateNoReload,
   validateCaptcha,
 } from "react-simple-captcha";
+import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 
 const Login = () => {
-  const captchaRef = useRef(null);
-const [disabled, setDisabled] = useState(true);
+  const [validatedError, setValidatedError] = useState("");
+  const [disabled, setDisabled] = useState(true);
+  const { loginUser } = useContext(AuthContext);
 
-  // 
+  //
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
@@ -28,18 +30,23 @@ const [disabled, setDisabled] = useState(true);
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    // console.log(email, password);
+    loginUser(email, password).then((userCredential) => {
+      const loggedUser = userCredential.user;
+      // console.log(loggedUser, "--> loggedUser");
+      Swal.fire("user login successfully");
+    });
   };
 
   //
-  const handleValidatedCaptcha = () => {
-    const user_captcha_value = captchaRef.current.value;
-
+  const handleValidatedCaptcha = (e) => {
+    const user_captcha_value = e.target.value;
+    console.log("user_captcha_value-->", user_captcha_value);
     if (validateCaptcha(user_captcha_value) == true) {
-      alert("Captcha Matched");  
+      setValidatedError("Captcha Matched");
       setDisabled(false);
     } else {
-      alert("Captcha Does Not Match");
+      setValidatedError("Captcha Does Not Match");
       setDisabled(true);
     }
   };
@@ -101,19 +108,18 @@ const [disabled, setDisabled] = useState(true);
                 <LoadCanvasTemplate />
               </label>
               <input
+                onBlur={handleValidatedCaptcha}
                 type="text"
                 placeholder="type the captcha above"
                 className="input input-bordered text-black"
                 name="captcha"
-                ref={captchaRef}
               />
-              {/* valided */}
-              <button
-                onClick={handleValidatedCaptcha}
-                className="btn btn-outline btn-warning mt-3 btn-xs"
-              >
-                is-valid
-              </button>
+              {/* =============
+              imran12345 
+              ============== */}
+
+
+               <p className="text-warning fw-bolder">{validatedError}</p> 
               <label className="label">
                 <a
                   href="#"
@@ -125,10 +131,20 @@ const [disabled, setDisabled] = useState(true);
             </div>
 
             <div className="form-control mt-2">
-              <input disabled={disabled} type="submit" value="Login" className="btn btn-warning" />
+              <input
+                disabled={disabled}
+                type="submit"
+                value="Login"
+                className="btn btn-warning"
+              />
             </div>
           </form>
-          <p className="pb-4">New here? <Link to="/singup" className="text-warning">Create a New Account</Link></p>
+          <p className="pb-4">
+            New here?{" "}
+            <Link to="/singup" className="text-warning">
+              Create a New Account
+            </Link>
+          </p>
         </div>
       </section>
     </div>

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 
 const SingUp = () => {
-  const { createUser } = useContext(AuthContext);
+  const { registerUser } = useContext(AuthContext);
 
   const {
     register,
@@ -15,8 +15,8 @@ const SingUp = () => {
   } = useForm();
   const onSubmit = (data) => {
     {
-      console.log(data);
-      createUser(data.email, data.password).then((userCredential) => {
+      // console.log(data); 
+      registerUser(data.email, data.password).then((userCredential) => {
         const newUser = userCredential.user;
         console.log(newUser, "--> newUser");
         reset()
