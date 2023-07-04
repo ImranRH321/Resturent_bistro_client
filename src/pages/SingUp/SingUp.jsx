@@ -1,25 +1,33 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
 
 const SingUp = () => {
-  const { registerUser } = useContext(AuthContext);
+  const { registerUser, updateProfileUser } = useContext(AuthContext);
+ const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
-    watch, reset ,
+    watch,
+    reset,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
     {
-      // console.log(data); 
+      console.log(data ,'register data');
       registerUser(data.email, data.password).then((userCredential) => {
         const newUser = userCredential.user;
-        console.log(newUser, "--> newUser");
-        reset()
+        // console.log(newUser, "--> newUser");
+        updateProfileUser(data.name, data.photoUrl) 
+        .then(()=> {
+          reset();
+          Swal.fire("user Register successfully");
+          navigate('/')
+        })
         
       });
     }
@@ -56,6 +64,22 @@ const SingUp = () => {
                 <p className="text-red-600">
                   {" "}
                   {errors.name && <span>This field is required</span>}
+                </p>
+              </div>
+              {/* photo  */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photo</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Your photo"
+                  className="input input-bordered"
+                  {...register("photoUrl", { required: true })}
+                />
+                <p className="text-red-600">
+                  {" "}
+                  {errors.photoUrl && <span>PhotoUrl is required</span>}
                 </p>
               </div>
               {/* email  */}

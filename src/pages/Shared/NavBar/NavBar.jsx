@@ -56,6 +56,7 @@ const NavBar = () => {
     
     {
       user ? <>
+      <span>{user?.displayName}</span> <br />
       <button onClick={logOutButton} className="btn btn-error btn-sm">LogOut</button>
       </>:<><li>
         <div className="flex gap-2 justify-center items-center">
