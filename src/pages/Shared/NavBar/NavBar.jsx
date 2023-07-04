@@ -42,15 +42,17 @@ const NavBar = () => {
         </label>
       </li>
 
-      <li>
-       <div className="flex gap-2 justify-center items-center">
+      {/* 
+  <div className="flex gap-2 justify-center items-center">
        <Link to="/login">Login</Link>
         <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
        </div>
-       <div className="flex gap-2 justify-center items-center">
-       <Link to="/">SIGN OUT</Link>
-        <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-       </div>
+*/}
+      <li>
+        <div className="flex gap-2 justify-center items-center">
+          <Link to="/singup">SIGN OUT</Link>
+          <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+        </div>
       </li>
     </>
   );

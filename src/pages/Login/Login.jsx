@@ -6,6 +6,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
@@ -123,10 +124,11 @@ const [disabled, setDisabled] = useState(true);
               </label>
             </div>
 
-            <div className="form-control mt-6">
+            <div className="form-control mt-2">
               <input disabled={disabled} type="submit" value="Login" className="btn btn-warning" />
             </div>
           </form>
+          <p className="pb-4">New here? <Link to="/singup" className="text-warning">Create a New Account</Link></p>
         </div>
       </section>
     </div>

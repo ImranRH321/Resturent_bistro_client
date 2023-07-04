@@ -33,6 +33,7 @@
  * Error --> paralaz not working error solve last time
  * npm install --save react-tabs
  * npm install react-simple-captcha --> login page captcha validation
+ * firebasde --> npm install firebase 
  * */
 
 
