@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
+import useCart from "../../../hooks/userCart";
 
 const FoodCard = ({ foodItem }) => {
   const { name, recipe, image, category, price, _id } = foodItem;
@@ -9,13 +10,14 @@ const FoodCard = ({ foodItem }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(location,'location',location);
-  // console.log(name, image);
-  // TODO:   Akane Image paitace na //
+  console.log(location, "location");
+
+  const {refetch} = useCart();
+
   const handleAddToCartBox = () => {
-    // TODO: user exist then api call 
+    // TODO: Image Paitace na // problem 1
     if (user) {
-      const cartItem = {foodItemId: _id, name, image, email: user.email}
+      const cartItem = { foodItemId: _id, name, image, email: user.email };
       console.log(cartItem);
       fetch("http://localhost:5000/carts", {
         method: "POST",
@@ -26,6 +28,8 @@ const FoodCard = ({ foodItem }) => {
         .then((result) => {
           // console.log(result, 'result');
           if (result.insertedId) {
+            // TODO: new babe reload ar kaj hoye jabe 
+            refetch();
             Swal.fire({
               position: "top-end",
               icon: "success",
@@ -47,9 +51,9 @@ const FoodCard = ({ foodItem }) => {
       }).then((result) => {
         if (result.isConfirmed) {
           // TODO: food button click new use login to foodCard page
-          // je pager take aice oi page niya gese  
-          navigate("/login", {state: {from:location}});
-          console.log({state: {from:location}});
+          // je pager take aice oi page niya gese
+          navigate("/login", { state: { from: location } });
+          console.log({ state: { from: location } });
         }
       });
     }

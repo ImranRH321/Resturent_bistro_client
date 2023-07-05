@@ -11,9 +11,11 @@ const useCart = () => {
       const res = await fetch(
         `http://localhost:5000/carts?email=${user?.email}`
       );
-      return res.json()
+      return res.json();
     },
   });
+ return {carts, refetch}
 };
+
 
 export default useCart;
