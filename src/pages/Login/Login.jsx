@@ -1,9 +1,3 @@
-// Main page use login pathname == login
-
-// if login hoy  == hide navbar or header
-// Create  a design login page nad  console emial , passsword
-// react caftrue password -->
-
 import React, { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
@@ -20,11 +14,12 @@ const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const { loginUser } = useContext(AuthContext);
 
-  // 
+  //
   let navigate = useNavigate();
   let location = useLocation();
   let from = location.state?.from?.pathname || "/";
-
+  // err
+  const [error, setError] = useState("");
 
   //
   useEffect(() => {
@@ -37,18 +32,19 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     // console.log(email, password);
-    loginUser(email, password).then((userCredential) => {
-      const loggedUser = userCredential.user;
-      // console.log(loggedUser, "--> loggedUser");
-      Swal.fire("user login successfully");
-      navigate(from, { replace: true });
-    });
+    loginUser(email, password)
+      .then((userCredential) => {
+        const loggedUser = userCredential.user;
+        // console.log(loggedUser, "--> loggedUser");
+        Swal.fire("user login successfully");
+        navigate(from, { replace: true });
+      })
+      .catch((err) => setError(err.message));
   };
 
   //
   const handleValidatedCaptcha = (e) => {
     const user_captcha_value = e.target.value;
-    console.log("user_captcha_value-->", user_captcha_value);
     if (validateCaptcha(user_captcha_value) == true) {
       setValidatedError("Captcha Matched");
       setDisabled(false);
@@ -100,7 +96,6 @@ const Login = () => {
                 required
                 name="password"
               />
-            
             </div>
             {/* caftrue  */}
             <div className="form-control text-warning">
@@ -118,8 +113,8 @@ const Login = () => {
               imran12345 
               ============== */}
 
-                 {/* TODO: Validation error Captcha Update After now */}
-               <p className="text-warning fw-bolder">{validatedError}</p> 
+              {/* TODO: Validation error Captcha Update After now */}
+              <p className="text-warning fw-bolder">{validatedError}</p>
               <label className="label">
                 <a
                   href="#"
@@ -129,9 +124,10 @@ const Login = () => {
                 </a>
               </label>
             </div>
-          
+            {/* TODO: Firebase error */}
+            <p className="text-red-500">{error}</p>
             <div className="form-control mt-2">
-            {/* TODO: disabled captcha  button after last change disabled */}
+              {/* TODO: disabled captcha  button after last change disabled */}
               <input
                 // disabled={disabled}
                 disabled={false}

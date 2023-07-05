@@ -37,6 +37,7 @@
  * React farmik login Register validation ar jonno use kora hay
  * npm install react-hook-form
  * npm install sweetalert2
+ * npm i @tanstack/react-query -ওয়েব অ্যাপ্লিকেশনের জন্য ডেটা-ফেচিংলাইব্রেরি 
  * 
  * */
 

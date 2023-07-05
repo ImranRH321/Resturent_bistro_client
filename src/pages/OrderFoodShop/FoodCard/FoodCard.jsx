@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const FoodCard = ({ foodItem }) => {
-  const { name, recipe, image, category, price } = foodItem;
+  const { name, recipe, image, category, price, _id } = foodItem;
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
@@ -12,13 +12,15 @@ const FoodCard = ({ foodItem }) => {
   console.log(location,'location',location);
   // console.log(name, image);
   // TODO:   Akane Image paitace na //
-  const handleAddToCartBox = (itemEat) => {
+  const handleAddToCartBox = () => {
     // TODO: user exist then api call 
     if (user) {
+      const cartItem = {foodItemId: _id, name, image, email: user.email}
+      console.log(cartItem);
       fetch("http://localhost:5000/carts", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify(itemEat),
+        body: JSON.stringify(cartItem),
       })
         .then((res) => res.json())
         .then((result) => {
@@ -27,7 +29,7 @@ const FoodCard = ({ foodItem }) => {
             Swal.fire({
               position: "top-end",
               icon: "success",
-              title: "Your work has been saved",
+              title: "food added on the cart",
               showConfirmButton: false,
               timer: 1500,
             });
@@ -72,7 +74,7 @@ const FoodCard = ({ foodItem }) => {
         <p>{recipe}</p>
         <div className="card-actions">
           <button
-            onClick={() => handleAddToCartBox(foodItem)}
+            onClick={handleAddToCartBox}
             className="btn btn-sm btn-outline border-b-orange-300 py-2"
           >
             add to cart
