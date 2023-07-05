@@ -1,18 +1,19 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const FoodCard = ({ foodItem }) => {
   const { name, recipe, image, category, price } = foodItem;
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
+  console.log(location,'location',location);
   // console.log(name, image);
   // TODO:   Akane Image paitace na //
   const handleAddToCartBox = (itemEat) => {
-    // console.log('eat: --> ',  itemEat);
-    alert("click");
+    // TODO: user exist then api call 
     if (user) {
       fetch("http://localhost:5000/carts", {
         method: "POST",
@@ -35,7 +36,7 @@ const FoodCard = ({ foodItem }) => {
     } else {
       Swal.fire({
         title: "Are you sure?",
-        text: "please to login to order page",
+        text: "please  login to the  order page",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -43,7 +44,10 @@ const FoodCard = ({ foodItem }) => {
         confirmButtonText: "login",
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate("/login");
+          // TODO: food button click new use login to foodCard page
+          // je pager take aice oi page niya gese  
+          navigate("/login", {state: {from:location}});
+          console.log({state: {from:location}});
         }
       });
     }

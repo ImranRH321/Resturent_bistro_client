@@ -100,14 +100,7 @@ const Login = () => {
                 required
                 name="password"
               />
-              <label className="label">
-                <a
-                  href="#"
-                  className="text-white label-text-alt link link-hover"
-                >
-                  Forgot password?
-                </a>
-              </label>
+            
             </div>
             {/* caftrue  */}
             <div className="form-control text-warning">
@@ -125,7 +118,7 @@ const Login = () => {
               imran12345 
               ============== */}
 
-
+                 {/* TODO: Validation error Captcha Update After now */}
                <p className="text-warning fw-bolder">{validatedError}</p> 
               <label className="label">
                 <a
@@ -136,10 +129,12 @@ const Login = () => {
                 </a>
               </label>
             </div>
-
+          
             <div className="form-control mt-2">
+            {/* TODO: disabled captcha  button after last change disabled */}
               <input
-                disabled={disabled}
+                // disabled={disabled}
+                disabled={false}
                 type="submit"
                 value="Login"
                 className="btn btn-warning"
