@@ -47,5 +47,6 @@
 1.npm init -y
 2.npm i express, cors, mongodb dotenv
 3. Express basic boylar  code 
+npm install jsonwebtoken
 */
 

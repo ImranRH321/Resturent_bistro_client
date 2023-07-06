@@ -8,6 +8,7 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const Login = () => {
   const [validatedError, setValidatedError] = useState("");
@@ -60,7 +61,7 @@ const Login = () => {
       </Helmet>
       <br />
 
-      <section className="grid md:grid-cols-2 ">
+      <section className="grid md:grid-cols-2 mb-5">
         <div className="imgParent">
           <img
             className="w-full"
@@ -109,21 +110,11 @@ const Login = () => {
                 className="input input-bordered text-black"
                 name="captcha"
               />
-              {/* =============
-              imran12345 
-              ============== */}
-
-              {/* TODO: Validation error Captcha Update After now */}
-              <p className="text-warning fw-bolder">{validatedError}</p>
-              <label className="label">
-                <a
-                  href="#"
-                  className="text-white label-text-alt link link-hover"
-                >
-                  Forgot password?
-                </a>
-              </label>
             </div>
+
+            {/* TODO: Validation error Captcha Update After now */}
+            <p className="text-warning fw-bolder">{validatedError}</p>
+
             {/* TODO: Firebase error */}
             <p className="text-red-500">{error}</p>
             <div className="form-control mt-2">
@@ -136,12 +127,14 @@ const Login = () => {
               />
             </div>
           </form>
-          <p className="pb-4">
+          <p className="pt-2">
             New here?{" "}
             <Link to="/singup" className="text-warning">
               Create a New Account
             </Link>
           </p>
+          {/* SocialLogin */}
+          <SocialLogin></SocialLogin>
         </div>
       </section>
     </div>

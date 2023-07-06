@@ -1,13 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const SingUp = () => {
   const { registerUser, updateProfileUser } = useContext(AuthContext);
- const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -16,20 +17,50 @@ const SingUp = () => {
     reset,
     formState: { errors },
   } = useForm();
+
+  // firebase show error
+  const [error, setError] = useState("");
+
   const onSubmit = (data) => {
     {
-      console.log(data ,'register data');
-      registerUser(data.email, data.password).then((userCredential) => {
-        const newUser = userCredential.user;
-        // console.log(newUser, "--> newUser");
-        updateProfileUser(data.name, data.photoUrl) 
-        .then(()=> {
-          reset();
-          Swal.fire("user Register successfully");
-          navigate('/')
+      registerUser(data.email, data.password)
+        .then((userCredential) => {
+          const RegisterUser = userCredential.user;
+          // console.log(newUser, "--> newUser");
+          updateProfileUser(data.name, data.photoUrl).then(() => {
+            // update now
+
+            const saveNewUser = {
+              name: data.name,
+              email: data.email,
+              password: data.password,
+              photoUrl: data.photoUrl,
+              userRole: "user",
+            };
+            console.log(saveNewUser, "saveNewUser");
+
+            //
+            fetch("http://localhost:5000/users ", {
+              method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify(saveNewUser),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                const token = data.createToken;
+                console.log(token, "only my token");
+                localStorage.setItem("accessToken", JSON.stringify(token));
+                reset();
+                Swal.fire("user Register successfully");
+                navigate("/");
+              });
+
+            //
+
+            //
+          });
         })
-        
-      });
+        .catch((err) => setError(err.message));
     }
   };
 
@@ -137,6 +168,8 @@ const SingUp = () => {
                   )}
                 </p>
               </div>
+              {/* firebase error  */}
+              <p className="text-red-600 mb-2">{error}</p>
               <div className="form-control mt-2">
                 <input type="submit" value="SingUp" className="btn btn-info" />
               </div>
@@ -149,6 +182,8 @@ const SingUp = () => {
                 </Link>
               </small>
             </p>
+            {/* socialLogin */}
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>
