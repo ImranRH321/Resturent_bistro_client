@@ -1,8 +1,10 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { FaCalendar, FaHome, FaShoppingCart, FaWallet } from "react-icons/fa";
+import useCart from "../hooks/userCart";
 //
 const Dashboard = () => {
+  const { carts } = useCart();
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -16,50 +18,53 @@ const Dashboard = () => {
           Open drawer
         </label>
       </div>
-      <div className="drawer-side">
+      <div className="drawer-side bg-[#D1A054]">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-        <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
+        <ul className="menu  p-4 w-80 h-full ">
           {/* Sidebar content here */}
 
           <li>
-            <Link>
+            <NavLink to="/home">
               {" "}
               <FaHome></FaHome> user home
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link>
+            <NavLink to="/dashboard/reservations">
               {" "}
               <FaCalendar></FaCalendar> Reservations
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link>
+            <NavLink>
               {" "}
               <FaWallet></FaWallet> payment history
-            </Link>
+            </NavLink>
           </li>
-          <li>
-            <Link>
+          <li >
+            <NavLink to="/dashboard/mycart">
               {" "}
-              <FaShoppingCart></FaShoppingCart> MyCart
-            </Link>
+              <FaShoppingCart></FaShoppingCart>
+             <p className="flex"><span> MyCart</span> <span className="border ms-5 badge badge-sm indicator-item">
+                {carts.length || 0}
+              </span></p>
+            </NavLink>
           </li>
           <div className="divider"></div>
           <li>
-            <Link to="/">
+            <NavLink to="/">
               {" "}
               <FaHome></FaHome> Home
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/ourMenu">Our Menu</Link>
+            <NavLink to="/ourMenu">Our Menu</NavLink>
           </li>
           <li>
-            <Link to="/orderFood/salad">Our Order</Link>
+            <NavLink to="/orderFood/salad">Our Order</NavLink>
           </li>
           <li>
-            <Link to="/contact">Contact</Link>
+            <NavLink to="/contact">Contact</NavLink>
           </li>
         </ul>
       </div>

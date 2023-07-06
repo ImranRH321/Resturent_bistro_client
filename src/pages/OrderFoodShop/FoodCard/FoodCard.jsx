@@ -12,12 +12,18 @@ const FoodCard = ({ foodItem }) => {
 
   console.log(location, "location");
 
-  const {refetch} = useCart();
+  const { refetch } = useCart();
 
   const handleAddToCartBox = () => {
     // TODO: Image Paitace na // problem 1
     if (user) {
-      const cartItem = { foodItemId: _id, name, image, email: user.email };
+      const cartItem = {
+        foodItemId: _id,
+        name,
+        image,
+        price,
+        email: user.email,
+      };
       console.log(cartItem);
       fetch("http://localhost:5000/carts", {
         method: "POST",
@@ -28,8 +34,8 @@ const FoodCard = ({ foodItem }) => {
         .then((result) => {
           // console.log(result, 'result');
           if (result.insertedId) {
-            // TODO: item updated refetching 
-            // TODO: new babe reload ar kaj hoye jabe 
+            // TODO: item updated refetching
+            // TODO: new babe reload ar kaj hoye jabe
             refetch();
             Swal.fire({
               position: "top-end",
