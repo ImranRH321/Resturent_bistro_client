@@ -28,6 +28,7 @@ const FoodCard = ({ foodItem }) => {
         .then((result) => {
           // console.log(result, 'result');
           if (result.insertedId) {
+            // TODO: item updated refetching 
             // TODO: new babe reload ar kaj hoye jabe 
             refetch();
             Swal.fire({
