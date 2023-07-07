@@ -5,6 +5,7 @@ const MenuItemCard = ({ menuItem }) => {
   console.log(image);
   return (
     <section className="flex items-center space-x-4">
+      {/* TODO: IMG paitacina   */}
       {/* <img src={image} alt="" /> */}
       <img
         className="w-[100px]"

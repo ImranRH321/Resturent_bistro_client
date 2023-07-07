@@ -61,13 +61,19 @@ const AuthProvider = ({ children }) => {
         axios
           .post("http://localhost:5000/jwt", { email: currentUser.email })
           .then((data) => {
-            const token = data.data;
+            console.log(data, " -data");
+            const token = data.data.token;
+
+            console.log("token set", token);
             if (token) {
-              localStorage.setItem("boos_token", JSON.stringify(token));
+              /* 
+              TODO: MISTIK NUMBER 1 CodeShon chara rakte hobe.
+              localStorage.setItem("accessToken", JSON.stringify(token)); */
+              localStorage.setItem("accessToken", token);
             }
           });
       } else {
-        localStorage.removeItem("boos_token");
+        localStorage.removeItem("accessToken");
       }
       //
       //
