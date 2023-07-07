@@ -39,7 +39,7 @@
  * npm install sweetalert2
  * npm i @tanstack/react-query -ওয়েব অ্যাপ্লিকেশনের জন্য ডেটা-ফেচিংলাইব্রেরি 
  * npm install react-icons --save 
- * 
+ * npm install axios
  * */
 
 

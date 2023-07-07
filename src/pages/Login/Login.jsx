@@ -36,7 +36,6 @@ const Login = () => {
     loginUser(email, password)
       .then((userCredential) => {
         const loggedUser = userCredential.user;
-        // console.log(loggedUser, "--> loggedUser");
         Swal.fire("user login successfully");
         navigate(from, { replace: true });
       })

@@ -47,9 +47,6 @@ const SingUp = () => {
             })
               .then((res) => res.json())
               .then((data) => {
-                const token = data.createToken;
-                console.log(token, "only my token");
-                localStorage.setItem("accessToken", JSON.stringify(token));
                 reset();
                 Swal.fire("user Register successfully");
                 navigate("/");

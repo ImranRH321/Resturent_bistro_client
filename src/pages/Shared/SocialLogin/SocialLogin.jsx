@@ -33,8 +33,7 @@ const SocialLogin = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            const token = data.createToken;
-            localStorage.setItem("accessToken", JSON.stringify(token));
+            
             navigate(from, { replace: true });
           });
         //
