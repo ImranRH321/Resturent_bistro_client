@@ -5,8 +5,11 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 const MyCart = () => {
+  // Dashboard myCart in now
   const { carts , refetch } = useCart();
   const totalPrice = carts.reduce((sum, item) => item.price + sum, 0);
+
+  // DELETED CART ITEMS
   const handleDeletedItem = (id) => {
     Swal.fire({
       title: "Are you sure?",

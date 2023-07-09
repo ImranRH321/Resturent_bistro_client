@@ -8,15 +8,17 @@ import OrderTab from "../OrderTab/OrderTab";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
+/* order page */
 const OrderFoodShop = () => {
-  const categories = ["salad", "dessert", "pizza", "drinks", "soup"];
+  const categories = ["salad", "pizza", "soup", "dessert", "drinks"];
+
   const { category } = useParams();
   const initialIndex = categories.indexOf(category);
 
   const [tabIndex, setTabIndex] = useState(initialIndex);
   const [foodMenu] = useFoodMenuData();
 
-  //   const offered = foodMenu.filter((item) => item.category === "offered");
+  
   const salad = foodMenu.filter((item) => item.category === "salad");
   const dessert = foodMenu.filter((item) => item.category === "dessert");
   const pizza = foodMenu.filter((item) => item.category === "pizza");
@@ -25,7 +27,7 @@ const OrderFoodShop = () => {
 
   return (
     <div>
-      <Helmet> 
+      <Helmet>
         <title>Bistro Boos || Order Food</title>
       </Helmet>
       <PageCover
@@ -39,12 +41,12 @@ const OrderFoodShop = () => {
 
       {/*Tab ==================*/}
       <section className="my-10 ">
-        <Tabs defaultIndex={1} onSelect={(index) => setTabIndex(index)}>
+        <Tabs selectedIndex={initialIndex} onSelect={(index) => setTabIndex(index)}>
           <TabList className="flex justify-center border-spacing-0">
             <Tab>Salad</Tab>
             <Tab>pizza</Tab>
-            <Tab>soups</Tab>
-            <Tab>desserts</Tab>
+            <Tab>soup</Tab>
+            <Tab>dessert</Tab>
             <Tab>drinks</Tab>
           </TabList>
 

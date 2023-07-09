@@ -2,18 +2,19 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { FaRegTrashAlt, FaUserShield } from "react-icons/fa";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AllUsers = () => {
+  const { apis } = useAxiosSecure();
   // Queries
   const { data: users = [] } = useQuery(["users"], async () => {
-    const res = await fetch("http://localhost:5000/users");
-    return res.json();
+    const res = await apis.get("/users");
+    return res.data;
   });
 
- 
   //   console.log(users);
   const handleMakeAdminUserRole = (user) => {
-    fetch(`http://localhost:5000/users/admin/${user.id}`, {
+    fetch(`http://localhost:5000/users/admin/${user._id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())

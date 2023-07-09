@@ -119,7 +119,7 @@ const Login = () => {
             <div className="form-control mt-2">
               {/* TODO: disabled captcha  button after last change disabled */}
               <input
-                disabled={disabled}
+                disabled={false}
                 type="submit"
                 value="Login"
                 className="btn btn-warning"

@@ -4,7 +4,7 @@ import FoodCard from "../FoodCard/FoodCard";
 const OrderTab = ({foodItems}) => {
   return (
     <div className="grid md:grid-cols-3 gap-10 mx-12 mt-8">
-      {foodItems.map((foodItem) => (
+      {foodItems.slice(0,4).map((foodItem) => (
         <FoodCard key={foodItem._id} foodItem={foodItem}></FoodCard>
       ))}
     </div>

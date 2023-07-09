@@ -5,65 +5,74 @@ import useCart from "../../../hooks/userCart";
 import { FaShoppingCart } from "react-icons/fa";
 
 const NavBar = () => {
-  const {user, logOut} = useContext(AuthContext)
+  const { user, logOut } = useContext(AuthContext);
 
   const logOutButton = () => {
     logOut()
-    .then(() => console.log('Logged out'))
-    .then((error) => console.log(error.message))
-  }
+      .then(() => console.log("Logged out"))
+      .then((error) => console.log(error.message));
+  };
 
-  // Cart 
-  const {carts} = useCart();
-// TODO: aLL CART added item 
+  // Cart
+  const { carts } = useCart();
+  // TODO: aLL CART added item
 
   const headersMenu = (
     <>
       <li>
-        <Link to="/">Home</Link>
+        <Link className="hover:text-warning" to="/">
+          Home
+        </Link>
       </li>
       <li>
-        <Link to="/contact">CONTACT us</Link>
+        <Link className="hover:text-warning"  to="/contact">CONTACT us</Link>
       </li>
       <li>
-        <Link to="/dashboard">DASHBOARD</Link>
+        <Link className="hover:text-warning" to="/dashboard">DASHBOARD</Link>
       </li>
       <li>
-        <Link to="/ourMenu">Our Menu</Link>
+        <Link className="hover:text-warning" to="/ourMenu">Our Menu</Link>
       </li>
       <li>
-        <Link to="/orderFood/salad">Our Shop</Link>
+        <Link className="hover:text-warning" to="/orderFood/salad">Our Shop</Link>
       </li>
       <li>
-        <Link to="/secret">Secret</Link>
+        <Link className="hover:text-warning" to="/secret">Secret</Link>
       </li>
 
       <li>
-       <Link to="/dashboard/mycart">
-       <label tabIndex={0} className="btn btn-ghost btn-circle">
-          <div className="indicator">
-            <FaShoppingCart></FaShoppingCart>
-            <span className="badge badge-sm indicator-item">{carts.length||0}</span>
-          </div>
-        </label>
-       </Link>
+        <Link className="hover:text-warning" to="/dashboard/mycart">
+          <label tabIndex={0} className="btn btn-ghost btn-circle">
+            <div className="indicator">
+              <FaShoppingCart></FaShoppingCart>
+              <span className="badge badge-sm indicator-item">
+                {carts.length || 0}
+              </span>
+            </div>
+          </label>
+        </Link>
       </li>
-    
-    {
-      user ? <>
-      <span>{user?.displayName}</span> <br />
-      <button onClick={logOutButton} className="btn btn-error btn-sm">LogOut</button>
-      </>:<><li>
-        <div className="flex gap-2 justify-center items-center">
-          <Link to="/login">Login</Link>
-          <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-        </div>
-      </li></>
-    }  
+
+      {user ? (
+        <>
+          <span>{user?.displayName}</span> <br />
+          <button onClick={logOutButton} className="btn btn-error btn-sm">
+            LogOut
+          </button>
+        </>
+      ) : (
+        <>
+          <li>
+            <div className="flex gap-2 justify-center items-center">
+              <Link to="/login">Login</Link>
+              <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+            </div>
+          </li>
+        </>
+      )}
     </>
   );
 
- 
   return (
     <>
       <button className="btn btn-primary">Button</button>

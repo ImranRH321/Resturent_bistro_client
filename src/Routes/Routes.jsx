@@ -10,6 +10,8 @@ import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layout/Dashboard";
 import MyCart from "../pages/Dashboard/MyCart/MyCart";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
+import AddItem from "../pages/Dashboard/AddItem/AddItem";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +45,9 @@ export const router = createBrowserRouter([
     children: [
       { path: "mycart", element: <MyCart></MyCart> },
       { path: "allusers", element: <AllUsers></AllUsers> },
+      { path: "addItem", element: <AdminRoute><AddItem></AddItem></AdminRoute>},
     ],
   },
+  // TODO: IRMAN PERSONAL LAYOUT BIGBOOS ONLY MY SECOUR ADMIN.
+  
 ]);

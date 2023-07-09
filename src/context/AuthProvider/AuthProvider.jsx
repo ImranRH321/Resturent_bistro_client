@@ -13,8 +13,8 @@ import app from "../../firebase/firebase.config";
 import axios from "axios";
 
 export const AuthContext = createContext();
+
 const auth = getAuth(app);
-//
 //
 
 const AuthProvider = ({ children }) => {
@@ -55,7 +55,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unSubscript = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false);
+    
       // TODO: Exist or new user login or singUp Apis call and Set token
       if (currentUser) {
         axios
@@ -63,14 +63,13 @@ const AuthProvider = ({ children }) => {
           .then((data) => {
             console.log(data, " -data");
             const token = data.data.token;
-
-            console.log("token set", token);
             if (token) {
               /* 
               TODO: MISTIK NUMBER 1 CodeShon chara rakte hobe.
               localStorage.setItem("accessToken", JSON.stringify(token)); */
               localStorage.setItem("accessToken", token);
             }
+            setLoading(false);
           });
       } else {
         localStorage.removeItem("accessToken");

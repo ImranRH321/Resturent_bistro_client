@@ -4,6 +4,10 @@ import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useCart from "../../../hooks/userCart";
 
+
+
+
+// the order page user any food add the cart .
 const FoodCard = ({ foodItem }) => {
   const { name, recipe, image, category, price, _id } = foodItem;
   const { user } = useContext(AuthContext);
@@ -13,7 +17,7 @@ const FoodCard = ({ foodItem }) => {
   console.log(location, "location");
 
   const { refetch } = useCart();
-
+ /* HANDLE ADD TO CART  */
   const handleAddToCartBox = () => {
     // TODO: Image Paitace na // problem 1
     if (user) {
@@ -32,10 +36,8 @@ const FoodCard = ({ foodItem }) => {
       })
         .then((res) => res.json())
         .then((result) => {
-          // console.log(result, 'result');
           if (result.insertedId) {
             // TODO: item updated refetching
-            // TODO: new babe reload ar kaj hoye jabe
             refetch();
             Swal.fire({
               position: "top-end",

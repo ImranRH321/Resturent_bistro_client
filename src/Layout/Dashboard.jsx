@@ -7,14 +7,21 @@ import {
   FaShoppingCart,
   FaUser,
   FaUtensils,
-  FaWallet
+  FaWallet,
 } from "react-icons/fa";
 import useCart from "../hooks/userCart";
+import useAdmin from "../hooks/useAdmin";
 //
 const Dashboard = () => {
   const { carts } = useCart();
-  // TODO: Load users Data amdin
-  const isAdmin = true;
+
+  // TODO: Admin online route
+  // TODO: isAdmin found what time form the database should  
+  const { isAdmin } = useAdmin(); 
+
+  console.log("dashobard isAdmin--> ", isAdmin);
+
+  // const isAdmin = true;
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -47,13 +54,24 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink><FaWallet></FaWallet> Manges Items</NavLink>
+                <NavLink>
+                  <FaWallet></FaWallet> Manges Items
+                </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/mycart"><FaBook></FaBook> Manage bookings</NavLink>
+                <NavLink to="/dashboard/mycart">
+                  <FaBook></FaBook> Manage bookings
+                </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/allusers"><FaUser></FaUser> all users</NavLink>
+                <NavLink to="/dashboard/allusers">
+                  <FaUser></FaUser> all users
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/addItem">
+                  <FaUser></FaUser> AddItem
+                </NavLink>
               </li>
             </>
           ) : (
