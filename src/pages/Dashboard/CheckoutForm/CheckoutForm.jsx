@@ -1,12 +1,13 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import React from "react";
+import React, { useState } from "react";
 
 const CheckoutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
+    const [cardError, setCardError] = useState('');
     // 
     const handleSubmit = async (event) => {
-     event.prevent();
+     event.preventDefault();
      if(!stripe || !elements){
         return 
      }  
@@ -15,12 +16,29 @@ const CheckoutForm = () => {
     if (card == null) {
         return;
       }
-
-    //   
+    //
+    console.log('Card -->', card);
+    // 
+      // Use your card Element with other Stripe.js APIs
+      const {error, paymentMethod} = await stripe.createPaymentMethod({
+        type: 'card',
+        card,
+      });
+  
+      if (error) {
+        console.log('[error]', error);
+        setCardError(error.message)
+      } else {
+          setCardError("")
+        console.log('PaymentMethod-->', paymentMethod);
+        alert("found payment method")
+      }
+        // 
     }
     // 
   return (
-    <form onSubmit={handleSubmit}>
+    <>
+    <form className="border p-4" onSubmit={handleSubmit}>
       <CardElement
         options={{
           style: {
@@ -37,10 +55,12 @@ const CheckoutForm = () => {
           },
         }}
       />
-      <button type="submit" disabled={!stripe}>
+      <button className="btn btn-primary btn-xs mt-6 ms-3 w-[100px] m-auto" type="submit" disabled={!stripe}>
         Pay
       </button>
     </form>
+    {cardError && <p className="text-red-600">{cardError}</p>}
+    </>
   );
 };
 
