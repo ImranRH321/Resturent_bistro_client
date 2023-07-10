@@ -3,6 +3,8 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider/AuthProvider';
 
 const PrivateRoute = ({children}) => {
+    // Todo: Security route 
+
     const {user,loading}  = useContext(AuthContext);
     let location = useLocation();
 

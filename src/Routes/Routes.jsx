@@ -12,6 +12,9 @@ import MyCart from "../pages/Dashboard/MyCart/MyCart";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import AddItem from "../pages/Dashboard/AddItem/AddItem";
 import AdminRoute from "./AdminRoute";
+import MangeItems from "../pages/Dashboard/MangeItems/MangeItems";
+import Imran from "../Layout/Imran";
+import Payment from "../pages/Dashboard/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -28,7 +31,7 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             {" "}
-            <Secret></Secret>
+            <Secret></Secret> {/* // Todo: under of secret Route // */}
           </PrivateRoute>
         ),
       },
@@ -39,15 +42,37 @@ export const router = createBrowserRouter([
     path: "dashboard",
     element: (
       <PrivateRoute>
+        {/* Todo: check user login or register Can Onley Access user  */}
         <Dashboard></Dashboard>
       </PrivateRoute>
     ),
     children: [
       { path: "mycart", element: <MyCart></MyCart> },
-      { path: "allusers", element: <AllUsers></AllUsers> },
-      { path: "addItem", element: <AdminRoute><AddItem></AddItem></AdminRoute>},
+      { path: "payment", element: <Payment></Payment> },
+      
+      // Admin Route
+      { path: "allusers", element: <AdminRoute><AllUsers></AllUsers></AdminRoute> },      
+      {
+        path: "addItem",
+        element: (
+          <AdminRoute>
+            <AddItem></AddItem>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manageItem",
+        element: (
+          <AdminRoute>
+            <MangeItems></MangeItems>
+          </AdminRoute>
+        ),
+      },
     ],
   },
   // TODO: IRMAN PERSONAL LAYOUT BIGBOOS ONLY MY SECOUR ADMIN.
-  
+  {
+    path: "imran",
+    element: <Imran></Imran>,
+  },
 ]);

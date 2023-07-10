@@ -12,8 +12,7 @@ const useCart = () => {
     queryKey: ["carts", user?.email],
     enabled: !loading,
     //
-    queryFn: async () => {
-      // TODO: I have mistik /  but 
+    queryFn: async () => { 
       const res = await apis(`carts?email=${user?.email}`);
       console.log("res form axios", res.data);
       return res.data;

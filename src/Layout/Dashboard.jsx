@@ -15,8 +15,7 @@ import useAdmin from "../hooks/useAdmin";
 const Dashboard = () => {
   const { carts } = useCart();
 
-  // TODO: Admin online route
-  // TODO: isAdmin found what time form the database should  
+  // TODO: Admin 
   const { isAdmin } = useAdmin(); 
 
   console.log("dashobard isAdmin--> ", isAdmin);
@@ -54,7 +53,7 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink>
+                <NavLink to="/dashboard/manageItem">
                   <FaWallet></FaWallet> Manges Items
                 </NavLink>
               </li>
@@ -86,6 +85,12 @@ const Dashboard = () => {
                 <NavLink to="/dashboard/reservations">
                   {" "}
                   <FaCalendar></FaCalendar> Reservations
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/payment">
+                  {" "}
+                  <FaCalendar></FaCalendar> Payment
                 </NavLink>
               </li>
               <li>
