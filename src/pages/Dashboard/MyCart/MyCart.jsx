@@ -3,10 +3,11 @@ import { Helmet } from "react-helmet-async";
 import useCart from "../../../hooks/userCart";
 import { FaRegTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const MyCart = () => {
   // Dashboard myCart in now
-  const { carts , refetch } = useCart();
+  const { carts, refetch } = useCart();
   const totalPrice = carts.reduce((sum, item) => item.price + sum, 0);
 
   // DELETED CART ITEMS
@@ -45,7 +46,9 @@ const MyCart = () => {
       <div className="flex gap-10 uppercase items-center">
         <h1>Total Items: {carts?.length}</h1>
         <h1>Total Price: ${totalPrice}</h1>
-        <button className="btn btn-warning btn-sm">Pay</button>
+        <Link to="/dashboard/payment">
+          <button className="btn btn-warning btn-sm">Pay</button>
+        </Link>
       </div>
       <div className="overflow-x-auto">
         <table className="table">
