@@ -5,12 +5,14 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import useCart from "../../../hooks/userCart";
 
-const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_pk);
+const stripePromise = loadStripe(import.meta.env.VITE_Payment_Publishable_key);
+console.log(stripePromise);
 
 const Payment = () => {
-  const {carts} = useCart();
-  const total = carts.reduce((sum, item) => sum+item.price,0)
+  const { carts } = useCart();
+  const total = carts.reduce((sum, item) => sum + item.price, 0);
   const price = parseFloat(total.toFixed(2));
+  console.log("payment total--price->", price);
   return (
     <div>
       <SectionTitle
