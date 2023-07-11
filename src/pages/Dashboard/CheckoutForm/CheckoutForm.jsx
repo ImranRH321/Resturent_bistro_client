@@ -2,6 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
+import "./CheckoutForm.css";
 
 const CheckoutForm = ({ price, carts }) => {
   const stripe = useStripe();
@@ -70,7 +71,6 @@ const CheckoutForm = ({ price, carts }) => {
 
     setProcessIng(false);
     //
-    // console.log(paymentIntent, "----> paymentIntent");
 
     if (paymentIntent.status === "succeeded") {
       const transactionId = paymentIntent.id;
@@ -80,15 +80,17 @@ const CheckoutForm = ({ price, carts }) => {
         email: user?.email,
         transactionId: paymentIntent.id,
         price,
-        quantity: carts.length,
-        itemId: carts.map((item) => item._id),
+        status: 'service pending',
+        date: new Date(),
+        menuFoodId: carts.foodItemId, 
+        cartItemsId: carts.map((item) => item._id),
         itemName: carts.map((item) => item.name),
+        quantity: carts.length,
+
       };
-      console.log('clinet side --->', payment);
       //  load apis
 
       apis.post("/payment", payment).then((res) => {
-        console.log('payment', res.data);
         if (res.data.insertedId) {
           // display success message
           alert("oke");
