@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 import useCart from "../../../hooks/userCart";
 import { FaShoppingCart } from "react-icons/fa";
+import useAdmin from "../../../hooks/useAdmin";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
-
+  const { isAdmin, isAdminLoading } = useAdmin();
   const logOutButton = () => {
     logOut()
       .then(() => console.log("Logged out"))
@@ -25,19 +26,41 @@ const NavBar = () => {
         </Link>
       </li>
       <li>
-        <Link className="hover:text-warning"  to="/contact">CONTACT us</Link>
+        <Link className="hover:text-warning" to="/contact">
+          CONTACT us
+        </Link>
       </li>
       <li>
-        <Link className="hover:text-warning" to="/dashboard">DASHBOARD</Link>
+        <Link
+          className="hover:text-warning"
+          to={`${isAdmin ? "/dashboard/adminhome" : "/dashboard/userhome"}`}
+        >
+          DASHBOARD
+        </Link>
+        {/*    {isAdmin ? (
+          <Link className="hover:text-warning" to="/dashboard/adminhome">
+            Dashobard
+          </Link>
+        ) : (
+          <Link className="hover:text-warning" to="/dashboard/userhome">
+            Dashobard
+          </Link>
+        )} */}
       </li>
       <li>
-        <Link className="hover:text-warning" to="/ourMenu">Our Menu</Link>
+        <Link className="hover:text-warning" to="/ourMenu">
+          Our Menu
+        </Link>
       </li>
       <li>
-        <Link className="hover:text-warning" to="/orderFood/salad">Our Shop</Link>
+        <Link className="hover:text-warning" to="/orderFood/salad">
+          Our Shop
+        </Link>
       </li>
       <li>
-        <Link className="hover:text-warning" to="/secret">Secret</Link>
+        <Link className="hover:text-warning" to="/secret">
+          Secret
+        </Link>
       </li>
 
       <li>
