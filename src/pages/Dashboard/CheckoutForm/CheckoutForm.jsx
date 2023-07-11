@@ -3,9 +3,7 @@ import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 
-const CheckoutForm = ({ price }) => {
-  console.log("CheckoutForm--> price --> ", price);
-
+const CheckoutForm = ({ price, carts }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [cardError, setCardError] = useState("");
@@ -38,7 +36,6 @@ const CheckoutForm = ({ price }) => {
       return;
     }
 
-
     // Use your card Element with other Stripe.js APIs
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
@@ -53,7 +50,7 @@ const CheckoutForm = ({ price }) => {
       // console.log("PaymentMethod-->", paymentMethod);
       alert("found payment method");
     }
-    // 
+    //
     setProcessIng(true);
     const { paymentIntent, error: confirmError } =
       await stripe.confirmCardPayment(clientSecret, {
@@ -71,13 +68,32 @@ const CheckoutForm = ({ price }) => {
       setCardError(confirmError.message);
     }
 
-    setProcessIng(false)
+    setProcessIng(false);
     //
-    console.log(paymentIntent, "----> paymentIntent");
+    // console.log(paymentIntent, "----> paymentIntent");
 
     if (paymentIntent.status === "succeeded") {
       const transactionId = paymentIntent.id;
       setTransactionId(transactionId);
+      // next post apis .
+      const payment = {
+        email: user?.email,
+        transactionId: paymentIntent.id,
+        price,
+        quantity: carts.length,
+        itemId: carts.map((item) => item._id),
+        itemName: carts.map((item) => item.name),
+      };
+      console.log('clinet side --->', payment);
+      //  load apis
+
+      apis.post("/payment", payment).then((res) => {
+        console.log('payment', res.data);
+        if (res.data.insertedId) {
+          // display success message
+          alert("oke");
+        }
+      });
     }
   };
   //
@@ -109,7 +125,11 @@ const CheckoutForm = ({ price }) => {
         </button>
       </form>
       {cardError && <p className="text-red-600">{cardError}</p>}
-      {transactionId && <p className="text-success">transactionId completed with transactionId  {transactionId}</p>}
+      {transactionId && (
+        <p className="text-success">
+          transactionId completed with transactionId {transactionId}
+        </p>
+      )}
     </>
   );
 };

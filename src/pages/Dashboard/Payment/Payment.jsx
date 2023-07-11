@@ -22,7 +22,7 @@ const Payment = () => {
       <h1 className="text-4xl">Teka teka tui oira Oira aso </h1>
       {/*  */}
       <Elements stripe={stripePromise}>
-        <CheckoutForm price={price}></CheckoutForm>
+        <CheckoutForm price={price} carts={carts}></CheckoutForm>
       </Elements>
     </div>
   );
