@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import "./CheckoutForm.css";
+//
 
 const CheckoutForm = ({ price, carts }) => {
   const stripe = useStripe();
@@ -80,13 +81,12 @@ const CheckoutForm = ({ price, carts }) => {
         email: user?.email,
         transactionId: paymentIntent.id,
         price,
-        status: 'service pending',
+        status: "service pending",
         date: new Date(),
-        menuFoodId: carts.foodItemId, 
+        menuItems: carts.map((item) => item.foodItemId),
         cartItemsId: carts.map((item) => item._id),
         itemName: carts.map((item) => item.name),
         quantity: carts.length,
-
       };
       //  load apis
 
